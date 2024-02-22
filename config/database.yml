@@ -53,3 +53,28 @@ production:
   database: ajax_app_rails7_2_production
   username: ajax_app_rails7_2
   password: <%= ENV["AJAX_APP_RAILS7_2_DATABASE_PASSWORD"] %>
+
+default: &default
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  adapter: mysql2
+  username: root
+  password:
+  host: localhost
+  database: ajax_app_rails7_development
+
+test:
+  <<: *default
+  adapter: mysql2
+  username: root
+  password:
+  host: localhost
+  database: ajax_app_rails7_test
+
+production:
+  <<: *default
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
